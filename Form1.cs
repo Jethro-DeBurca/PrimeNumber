@@ -14,9 +14,44 @@ namespace PrimeNumber
     public partial class Form1 : Form
     {
 
-        private void primeCheck(int 1num, int 2num)
+        private void primeCheck(int num1, int num2)
         {
+            // Clearing previous text
+            tb_sum.Text = String.Empty;
 
+            // Declaring my variables
+            int sum, ctr, i;
+            int x = 0;
+
+            for (sum = num1; sum <= num2; sum++)
+            {
+                ctr = 0;
+
+                for (i = 2; i <= sum / 2; i++)
+                {
+                    if (sum % i == 0) // Checking/Counting remainders
+                    {
+                        ctr++;
+                        break;
+                    }
+                }
+
+                if (ctr == 0 && sum != 1)
+                {
+                    // Converting int to String
+                    tb_sum.Text += sum.ToString() + "   ";
+                    x++;
+                }
+
+                // Starting a new line after every 5 numbers
+                if (x == 5)
+                {
+                    tb_sum.Text += " \r\n";
+                    x = 0;
+                }
+            }
+
+            return;
         }
 
         public Form1()
@@ -37,43 +72,15 @@ namespace PrimeNumber
         private void button1_Click(object sender, EventArgs e)
         {
             // Declaring my variables
-            int num1, num2, sum, ctr, i;
-            int x = 0;
-            num1 = Int32.Parse(tb_num1.Text);
-            num2 = Int32.Parse(tb_num2.Text);
-            //sum = num1 + num2;
+            int number1 = Int32.Parse(tb_num1.Text);
+            int number2 = Int32.Parse(tb_num2.Text);
 
-            for (sum = num1; sum <= num2; sum++)
-            {
-                ctr = 0;
+            primeCheck(number1, number2);
+        }
 
-                for (i = 2; i <= sum / 2; i++)
-                {
-                    if (sum % i == 0) // Checking/Counting remainders
-                    {
-                        ctr++;
-                        break;
-                    }
-                }
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
-                if (ctr == 0 && sum != 1)
-                {
-                    //Console.Write("{0} ", sum);
-
-                    // Converting int to String
-                    tb_sum.Text += sum.ToString() + " ";
-                    x++;
-                }
-
-                // Starting a new line after every 5 numbers
-                if (x == 5)
-                {
-                    tb_sum.Text += " \r\n";
-                    x = 0;
-                }
-            }
-
-            //lbl_sum.Text = sum.ToString();
         }
     }
 }
